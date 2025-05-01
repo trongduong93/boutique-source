@@ -36,7 +36,7 @@ jobs:
         id: build_image
         run: |
           SERVICE_NAME="productcatalogservice"
-          IMAGE_NAME=vietchita/boutique-${SERVICE_NAME}:ver-$(git rev-parse --short HEAD)
+          IMAGE_NAME=trongduonghsht/trongdd-${SERVICE_NAME}:ver-$(git rev-parse --short HEAD)
           docker build -t $IMAGE_NAME ./src/$SERVICE_NAME
           echo $IMAGE_NAME
           docker push $IMAGE_NAME
@@ -50,10 +50,10 @@ jobs:
         run: |
           SERVICE_NAME="productcatalogservice"
           HELM_SERVICE_NAME="productCatalogService"
-          IMAGE_NAME=vietchita/boutique-${SERVICE_NAME}:ver-$(git rev-parse --short HEAD)
+          IMAGE_NAME=trongduonghsht/trongdd-${SERVICE_NAME}:ver-$(git rev-parse --short HEAD)
           
           # Clone the helmchart repo
-          git clone https://github.com/rockman88v/boutique-helmchart.git
+          git clone https://github.com/trongduong93/boutique-helmchart.git
           cd boutique-helmchart/helm-chart
           
           # Update values.yaml with the new image using yq
@@ -62,7 +62,7 @@ jobs:
           # Commit and push the updated values.yaml
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git remote set-url origin https://rockman88v:${{ secrets.GH_PAT }}@github.com/rockman88v/boutique-helmchart.git
+          git remote set-url origin https://trongduong93:${{ secrets.GH_PAT }}@github.com/trongduong93/boutique-helmchart.git
           git add values.yaml
           git commit -m "Update ${HELM_SERVICE_NAME} image to ${IMAGE_NAME}"
           git push
