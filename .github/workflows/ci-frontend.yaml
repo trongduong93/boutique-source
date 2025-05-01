@@ -37,7 +37,7 @@ jobs:
         run: |
           SERVICE_NAME="frontend"
           IMAGE_NAME=trongduonghsht/trongdd-${SERVICE_NAME}:ver-$(git rev-parse --short HEAD)          
-          docker buildx build --cache-from=type=inline,ref=trongduonghsht/trongdd-${SERVICE_NAME}:cache --cache-to=type=inline,ref=trongduonghsht/trongdd-${SERVICE_NAME}:cache,mode=max -t $IMAGE_NAME ./src/$SERVICE_NAME --push
+          docker buildx build --no-cache -t $IMAGE_NAME ./src/$SERVICE_NAME --push
           echo $IMAGE_NAME
 
       - name: Install yq
